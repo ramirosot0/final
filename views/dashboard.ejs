@@ -1,0 +1,130 @@
+<%include partials/header.ejs%>
+<div class="page-wrapper">
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1"><a href="/">Welcome <%= username%>!</a></span>
+        <button class="float-right btn btn-primary" id="add">Add Time Slot</button>
+        <a class="btn btn-warning" href="/logout">Log out</a>
+    </nav>
+</div>
+<div class="table-wrapper">
+    <% if (meet.length > 0) {%>
+        <table class="table table-hovered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Booked by</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% meet.forEach((meet, index) => { %>
+                <tr>
+                    <th scope="row"><%= meet.id %></th>
+                    <td><%= meet.date %></td>
+                    <td><%= meet.starttime %></td>
+                    <td><%= meet.duration %></td>
+                    <td><%= meet.bookedby%></td>
+                    <td>
+                        <a href="/delete/<%= meet.id %>" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p class="text-center">No meetings found. Go <a href="/add" >here</a> to add meeting.</p>
+    <% } %>
+</div>
+
+
+<div class="container">
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Time Slot </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/add" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="first-name">Name</label>
+                                <input type="text" class="form-control" name="nombre" id="first-name" placeholder="name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="datepicker">Date</label>
+                                <input id="datepicker" name="date" format="yyyy-mm-dd" width="276" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="starttime">Start Time</label>
+                                <input type="text" class="form-control" name="starttime" id="starttime" placeholder="10:30:00" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="endtime">Duration</label>
+                                <input type="text" class="form-control" name="endtime" id="endtime" placeholder="02:30:00" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-primary float-right">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function() {
+
+        $('#add').on("click", function () {
+            $('#myModal').modal('show');
+            console.log("maria la de la pata fria");
+        });
+
+
+        $('#datepicker').datepicker({
+            //uiLibrary: 'bootstrap4'
+            //format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            value: '2019-12-15',
+            minDate: '2019-12-15',
+            uiLibrary: 'bootstrap4'
+        });
+
+
+
+
+
+
+    });
+</script>
+
+
+
+<% include partials/footer.ejs%>

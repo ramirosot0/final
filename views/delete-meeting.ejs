@@ -1,0 +1,22 @@
+<%include partials/header.ejs%>
+
+<form action="/delete/<%= user.id %>" method="post">
+    <table class="table table-borderless">
+        <tbody>
+        <tr>
+            <td>Start Time:  <%=user.date%> At <%= user.starttime%></td><br>
+        </tr>
+        <tr>
+            <td>End Time: <%=user.date%> At <%= user.time%></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-danger float-left">Delete</button>
+                <a href="/" class="btn btn-secondary float-left">Cancel</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<%include partials/footer.ejs%>
