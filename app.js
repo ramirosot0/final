@@ -64,6 +64,12 @@ app.post('/delete/:id', deletePost);
 
 
 //set the app to listen on the port
-app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
+// app.listen(port, () => {
+//     console.log(`Server running on port: ${port}`);
+// });
+
+
+//heroku listener
+app.listen(process.env.PORT, process.env.IP, function () {
+    console.log("Running Express Server...");
 });
